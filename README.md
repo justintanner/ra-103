@@ -1,25 +1,14 @@
 ## Rails Academy: Lesson 101
 
-By the end of this lesson you will publish a "Hello World" app to real server.
+In this less we will cover all the fundamental command line tricks you'll need for this course.
+
+This lesson is **required** for all other lessons.
 
 ### Topics
 
 1. [Bash](https://en.wikipedia.org/wiki/Bash_(Unix_shell)) 
 2. [GitHub](https://github.com)
-2. [GitHub CLI (gh)](https://cli.github.com)
-3. [1Password](https://1password.com)
-4. [Docker Hub](https://hub.docker.com)
-
-### Verify your setup
-
-1. Open Alacritty
-2. Type the following command followed by Enter:
-
-```bash
-ra verify
-```
-
-**Note: If you don't have `ra` try [reinstalling Rails Academy](https://github.com/justintanner/rails-academy)**
+3. [GitHub CLI (gh)](https://cli.github.com)
 
 ### Register your Skool account
 
@@ -28,48 +17,22 @@ ra verify
 3. Run: 
  
 ```bash
-ra skool @your-school-id
+ra skool @skool-username
 ```
 
-### Get into the lesson folder
+### Change directory into the lesson folder
 
 ```bash
 cd ~/ralessons/ra-101
 ```
 
-### 1Password (the hard way, best security)
-
-1. Open 1Password from your Applications folder
-2. Start a free trial (or login if you already have an account)
-3. Select `1Password` from the menu bar and choose `Settings`
-4. Navigate to the `Developer` tab and enable the following:
-
-- :check: `Use the SSH agent`
-- :check: `Integrate with 1Password CLI`
-
-#### Generate an SSH Key with 1Password
-
-1. Still in 1Password click "+ New Item"
-2. Choose "SSH Key"
-3. Enter the title "GitHub SSH Key"
-4. Click "+ Add Private Key" -> "Generate a New Key"
-5. Leave the default of "Ed25519" and click "Generate"
-6. Click "Save"
-
-
-### ssh-keygen (the easy way, but less secure)
-
-If you don't want to use 1Password, we can create an SSH key manually.
-
-1. Open Alacritty and type
+### Generate an SSH key
 
 ```bash
 ssh-keygen -t ed25519
 ```
 
-2. Press enter to accept the all the defaults, and select no password
-
-**Note: This will create a new SSH key on your computer only, if you lose it's on you.**
+Press enter to accept the all the defaults, and select **do not enter a password**
 
 ### GitHub
 
@@ -78,12 +41,7 @@ ssh-keygen -t ed25519
 1. Visit [GitHub](https://github.com)
 2. Create an account (or login if you already have one)
 
-#### Copy your public key from 1password
-
-1. Open 1Password and find "GitHub SSH Key" created above
-2. Copy the **public** key, not the private key.
-
-#### Copy your public key from the "less secure way"
+#### Copy your public key
 
 On Mac run:
 
@@ -116,19 +74,87 @@ ssh -T git@github.com
 If that worked you should see:
 
 ```
-Hi yourname! You've successfully authenticated, but GitHub does not provide shell access.
+Hi yourgithubusername! You've successfully authenticated, but GitHub does not provide shell access.
 ```
 
-### Docker Hub
+### Change a file
 
-We'll need a Docker Hub account to push and pull images.
+Lets make a small change that we can check into Git.
 
-1. Visit [Docker Hub](https://hub.docker.com)
-2. Create an account (or login if you already have one)
-3. Click your profile in the top right and choose "Account Settings"
-4. Click "Security" and create a new access token
-5. Open 1Password and create a new item with the title "Docker Hub Token"
-6. Copy the token and paste it into the "Password" field
-7. Click "Save"
+```bash
+ra details > ra_details.log
+```
 
-### Your done! :tada:
+Now lets add this change to git with a message:
+
+```bash
+git add ra_details.log
+```
+
+And commit that change to our local repository
+
+```bash
+git commit -m "Added a log file for review"
+```
+
+### Create a branch
+
+Make sure you are in the `~/ralessons/ra-101` directory
+
+```bash
+cp ~/ralessons/ra-101
+```
+
+Create a git branch with your Skool name like so:
+
+```bash
+git branch $RA_SKOOL
+git checkout $RA_SKOOL
+```
+
+In Alacritty you should see this before every command:
+
+```
+~/ralessons/ra-101 [@skool-username]
+$ _
+```
+
+This means git is currently on the `@skool-username` branch.
+
+### Create a Pull Request
+
+Lets get GitHub CLI interface connected, run:
+
+```bash
+gh auth login
+```
+
+Choose `Github.com -> HTTPS -> Login with web browser`
+
+#### Create your first PR
+
+After logging in run:
+
+```bash
+gh pr create
+```
+
+1. Select the default branch `ra-101[@your-skool-username]`
+2. Set a `Title` to `Please review my first lesson` (or anything you like)
+3. Submit
+
+If you've completed everything you should see a url like:
+
+```
+https://github.com/justintanner/ra-101/pull/1
+```
+
+### :tada: You made to the end.
+
+Check back at the URL above if there is any feedback from your teacher, otherwise move on the next lesson.
+
+#### [Lesson 102](https://github.com/justintanner/ra-102)
+
+### Resources
+
+1. :youtube: [Bash in 100 Seconds](https://www.youtube.com/watch?v=I4EWvMFj37g)
