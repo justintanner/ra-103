@@ -1,0 +1,68 @@
+# Run this on all PRs for Lesson 103
+on:
+  pull_request:
+
+permissions:
+  pull-requests: write
+
+jobs:
+  assign-author:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: toshimaru/auto-author-assign@v2.1.1
+
+  check-lesson-103:
+    runs-on: ubuntu-latest
+    environment: Rails Academy API
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Visit the server
+        id: extract_server
+        run: |
+          SERVER_URL=$(grep -Eo "host: [a-zA-Z0-9_\-]+.rails.academy" config/deploy.yml | sed 's/host: //')
+          
+          if [ -z "$SERVER_URL" ]; then
+            echo "Error: Could not extract server URL from deploy.rb." >&2
+            exit 1
+          fi
+
+          echo "Visiting the deployed server at $SERVER_URL..."
+          
+          RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" "https://$SERVER_URL")
+
+          if [ "$RESPONSE" -ne 200 ]; then
+            echo "Error: Failed to get a 200 response from $server_url. HTTP Status: $RESPONSE" >&2
+            exit 1
+          fi
+
+          echo "Successfully received a 200 response from $SERVER_URL."
+
+      - name: Register with Rails Academy
+        run: |
+          GITHUB_USERNAME=${{ github.actor }}
+          GITHUB_ID=${{ github.actor_id }}
+
+          echo "Registering for Lesson 103 for GitHub user '$GITHUB_USERNAME'..."
+
+          RESPONSE=$(curl -s -X POST \
+            -H "Authorization: Bearer ${{ secrets.RA_API_TOKEN }}" \
+            -d "github_id=$GITHUB_ID" \
+            -d "github_username=$GITHUB_USERNAME" \
+            -d "lesson=103" \
+            -w "%{http_code}" \
+            -o /tmp/lesson_response_body.txt \
+            https://rails.academy/commands/finish_lesson)
+
+          if [ "$RESPONSE" -ne 200 ]; then
+            echo "Error: Failed to register Lesson 103. HTTP Status: $RESPONSE TOKEN: ${{ secrets.RA_API_TOKEN }}" >&2
+            echo "Response Body: $(cat /tmp/lesson_response_body.txt)" >&2
+            exit 1
+          fi
+
+          echo "Successfully registered Lesson 103 for GitHub user '$GITHUB_USERNAME'."
+
+      - name: Success
+        run: echo "All checks passed for Lesson 103!"
