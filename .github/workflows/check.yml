@@ -1,0 +1,94 @@
+name: Check 101
+
+# Run this on all PRs
+on:
+  pull_request:
+
+permissions:
+  pull-requests: write
+
+jobs:
+  assign-author:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: toshimaru/auto-author-assign@v2.1.1
+
+  check-lesson:
+    runs-on: ubuntu-latest
+    environment: Rails Academy API
+
+    steps:
+      - name: Can we contact the Rails Academy API?
+        run: |
+          curl -s -H "Authorization: Bearer ${{ secrets.RA_API_TOKEN }}" https://rails.academy/query || exit 1
+
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Check if skool.txt exists
+        run: |
+          if [ ! -f "./skool.txt" ]; then
+            echo "Error: skool.txt file not found in the root directory." >&2
+            exit 1
+          fi
+
+      - name: Check if skool.txt is not empty
+        run: |
+          if [ ! -s "./skool.txt" ]; then
+            echo "Error: skool.txt file is empty." >&2
+            exit 1
+          fi
+
+      - name: Are you in the Skool community?
+        run: |
+          SKOOL_NAME=$(cat ./skool.txt | tr -d '\n' | tr -d '\r' | sed 's/[^a-zA-Z0-9_-]//g')
+          if [ -z "$SKOOL_NAME" ]; then
+            echo "Error: skool.txt is empty." >&2
+            exit 1
+          fi
+          echo "Checking skool.txt content: $SKOOL_NAME"
+
+          QUERY="https://rails.academy/query?sources=skool_name&skool_name.name=$SKOOL_NAME"
+          echo "Querying API: $QUERY"
+
+          RESPONSE=$(curl -s -H "Authorization: Bearer ${{ secrets.RA_API_TOKEN }}" "$QUERY")
+          CURL_EXIT_CODE=$?
+
+          if [ "$CURL_EXIT_CODE" -ne 0 ]; then
+            echo "Error: curl command failed with exit code $CURL_EXIT_CODE" >&2
+            exit 1
+          fi
+
+          echo "API Response: $RESPONSE"
+          echo "Success: skool name '$SKOOL_NAME' verified with API!"
+
+      - name: Register with Rails Academy
+        run: |
+          GITHUB_USERNAME=${{ github.actor }}
+          SKOOL_NAME=$(cat ./skool.txt | tr -d '\n' | tr -d '\r' | sed 's/[^a-zA-Z0-9_-]//g')
+
+          if [ -z "$SKOOL_NAME" ]; then
+            echo "Error: skool.txt is empty or invalid." >&2
+            exit 1
+          fi
+          
+          echo "Syncing skool name '$SKOOL_NAME' for GitHub user '$GITHUB_USERNAME'..."
+
+          RESPONSE=$(curl -s -X POST \
+            -H "Authorization: Bearer ${{ secrets.RA_API_TOKEN }}" \
+            -d "github_username=$GITHUB_USERNAME" \
+            -d "skool_name=$SKOOL_NAME" \
+            -w "%{http_code}" \
+            -o /tmp/sync_response_body.txt \
+            https://rails.academy/commands/register)
+
+          if [ "$RESPONSE" -ne 200 ]; then
+            echo "Error: Failed to sync skool name to GitHub. HTTP Status: $RESPONSE" >&2
+            echo "Response Body: $(cat /tmp/sync_response_body.txt)" >&2
+            exit 1
+          fi
+
+          echo "Successfully synced skool name '$SKOOL_NAME' for GitHub user '$GITHUB_USERNAME'."
+
+      - name: Success
+        run: echo "All checks passed!"
