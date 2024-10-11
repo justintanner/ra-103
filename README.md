@@ -6,9 +6,10 @@ This lesson is **required** for all other lessons.
 
 ### Topics
 
-1. [Bash](https://en.wikipedia.org/wiki/Bash_(Unix_shell)) 
-2. [GitHub](https://github.com)
-3. [GitHub CLI (gh)](https://cli.github.com)
+- Bash 
+- GitHub
+- SSH Keys
+- GitHub CLI (gh)
 
 ### Register your Skool account
 
@@ -77,7 +78,7 @@ If that worked you should see:
 Hi yourgithubusername! You've successfully authenticated, but GitHub does not provide shell access.
 ```
 
-### Change a file
+### Add a file to git
 
 Lets make a small change that we can check into Git.
 
@@ -123,7 +124,9 @@ This means git is currently on the `@skool-username` branch.
 
 ### Create a Pull Request
 
-Lets get GitHub CLI interface connected, run:
+Are you ready push your changes to Github for review?
+
+Lets get the GitHub CLI (gh) connected:
 
 ```bash
 gh auth login
@@ -139,9 +142,9 @@ After logging in run:
 gh pr create
 ```
 
-1. Select the default branch `ra-101[@your-skool-username]`
-2. Set a `Title` to `Please review my first lesson` (or anything you like)
-3. Submit
+1. Select the default option. Your should see `@your-skool-username -> main`
+2. Set a `Title` to `Please review my first lesson`
+3. Select `Submit`
 
 If you've completed everything you should see a url like:
 
@@ -158,3 +161,4 @@ Check back at the URL above if there is any feedback from your teacher, otherwis
 ### Resources
 
 1. :youtube: [Bash in 100 Seconds](https://www.youtube.com/watch?v=I4EWvMFj37g)
+2. :youtube: [Git Explained in 100 Seconds](https://www.youtube.com/watch?v=hwP7WQkmECE)
