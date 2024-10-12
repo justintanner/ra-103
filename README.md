@@ -1,8 +1,6 @@
-## Rails Academy: Lesson 101
+## Rails Academy: Lesson 101 - Command Line Essentials
 
-In this less we will cover all the fundamental command line tricks you'll need for this course.
-
-This lesson is **required** for all other lessons.
+This lesson covers the fundamental command-line skills required for this course. Completion is necessary before proceeding to other lessons.
 
 ### Topics
 
@@ -11,90 +9,73 @@ This lesson is **required** for all other lessons.
 - SSH Keys
 - GitHub CLI (gh)
 
-### Register your Skool account
+### 1. Register your Skool account
 
-1. Visit [Skool](https://skool.com) your profile (top right)
-2. Copy your "Skool ID" and paste it into the terminal when prompted
-3. Run: 
+- Visit Skool and copy your “Skool ID” from your profile.
+- In the terminal, run:
  
 ```bash
 ra skool @skool-username
 ```
 
-### Change directory into the lesson folder
+### 2. Navigate to the Lesson Folder
 
 ```bash
 cd ~/ralessons/ra-101
 ```
 
-### Generate an SSH key
+### 3. Generate an SSH Key
 
 ```bash
 ssh-keygen -t ed25519
 ```
 
-Press enter to accept the all the defaults, and select **do not enter a password**
+- Press Enter to accept defaults.
+- Do not enter a password when prompted.
 
-### GitHub
+### 4. Sign Up for GitHub
 
-#### Signup to Github
+- Visit [GitHub](https://github.com) and create an account or log in if you already have one.
 
-1. Visit [GitHub](https://github.com)
-2. Create an account (or login if you already have one)
+### 5. Add SSH Key to GitHub
 
-#### Copy your public key
+#### macOS
 
-On Mac run:
-
-```
+```bash
 pbcopy < ~/.ssh/id_ed25519.pub
 ```
 
-On Ubuntu and Windows run:
+#### Ubuntu and Windows
 
-```
+```bash
 cat ~/.ssh/id_ed25519.pub
 ```
 
-Copy the output of that command.
+- Copy the output.
 
-#### Paste your public key into GitHub
+### 6. Add SSH Key to GitHub
 
-3. Choose "Settings" -> "SSH and GPG keys" -> "New SSH Key"
+- In GitHub, navigate to Settings > SSH and GPG keys > New SSH Key.
+- Paste your public key into the “Key” field.
+- Click Add SSH Key.
 
-3. In 1Password find "GitHub SSH Key" and copy the **public key**
-4. Paste your public key into the "Key" field
-5. Click "Add SSH Key"
-
-Test your SSH key by running the following in Alacritty:
+### 7. Test SSH Connection
 
 ```bash
 ssh -T git@github.com
 ```
 
-If that worked you should see:
+Expected output:
 
-```
+```bash
 Hi yourgithubusername! You've successfully authenticated, but GitHub does not provide shell access.
 ```
 
-### Add a file to git
-
-Lets make a small change that we can check into Git.
+### 8. Add a File to Git
 
 ```bash
 ra details > ra_details.log
-```
-
-Now lets add this change to git with a message:
-
-```bash
 git add ra_details.log
-```
-
-And commit that change to our local repository
-
-```bash
 git commit -m "Added a log file for review"
 ```
 
@@ -106,59 +87,60 @@ Make sure you are in the `~/ralessons/ra-101` directory
 cp ~/ralessons/ra-101
 ```
 
-Create a git branch with your Skool name like so:
+### 9. Create a Branch
+
+- Ensure you’re in the ~/ralessons/ra-101 directory.
+- Create and switch to a branch named after your Skool username:
 
 ```bash
-git branch $RA_SKOOL
-git checkout $RA_SKOOL
+git branch @skool-username
+git checkout @skool-username
 ```
 
-In Alacritty you should see this before every command:
 
-```
+Your terminal prompt should now show:
+
+```bash
 ~/ralessons/ra-101 [@skool-username]
 $ _
 ```
 
 This means git is currently on the `@skool-username` branch.
 
-### Create a Pull Request
 
-Are you ready push your changes to Github for review?
+### 10. Create a Pull Request
 
-Lets get the GitHub CLI (gh) connected:
+- Authenticate with GitHub CLI:
 
 ```bash
 gh auth login
 ```
 
-Choose `Github.com -> HTTPS -> Login with web browser`
-
-#### Create your first PR
-
-After logging in run:
+* Select GitHub.com > HTTPS > Login with web browser.
+* Create the PR:
 
 ```bash
 gh pr create
 ```
 
-1. Select the default option. Your should see `@your-skool-username -> main`
-2. Set a `Title` to `Please review my first lesson`
-3. Select `Submit`
+* Choose the default option (@skool-username -> main).
+* Set the title to “Please review my first lesson”.
+* Submit
+* You’ll receive a URL like:
 
-If you've completed everything you should see a url like:
-
+```bash
+https://github.com/yourusername/ra-101/pull/1
 ```
-https://github.com/justintanner/ra-101/pull/1
-```
 
-### :tada: You made to the end.
+### Completion
 
-Check back at the URL above if there is any feedback from your teacher, otherwise move on the next lesson.
-
-#### [Lesson 102](https://github.com/justintanner/ra-102)
+* Check the PR URL for any feedback from your teacher.
+* Proceed to [Lesson 102](https://github.com/justintanner/ra-102) when ready.
 
 ### Resources
 
-1. :youtube: [Bash in 100 Seconds](https://www.youtube.com/watch?v=I4EWvMFj37g)
-2. :youtube: [Git Explained in 100 Seconds](https://www.youtube.com/watch?v=hwP7WQkmECE)
+1. :tv: [Bash in 100 Seconds](https://www.youtube.com/watch?v=I4EWvMFj37g)
+2. :tv: [Git Explained in 100 Seconds](https://www.youtube.com/watch?v=hwP7WQkmECE)
+
+
+
