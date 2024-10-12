@@ -139,8 +139,8 @@ https://github.com/yourusername/ra-101/pull/1
 
 ### Resources
 
-1. :tv: [Bash in 100 Seconds](https://www.youtube.com/watch?v=I4EWvMFj37g)
-2. :tv: [Git Explained in 100 Seconds](https://www.youtube.com/watch?v=hwP7WQkmECE)
-
+- :tv: [Bash in 100 Seconds](https://www.youtube.com/watch?v=I4EWvMFj37g)
+- :tv: [Git Explained in 100 Seconds](https://www.youtube.com/watch?v=hwP7WQkmECE)
+- :tv: [How to clone, push, and pull with git](https://www.youtube.com/watch?v=yxvqLBHZfXk)
 
 
