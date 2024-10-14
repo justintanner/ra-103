@@ -1,6 +1,6 @@
 ## Rails Academy: Lesson 101 - Command Line Essentials
 
-This lesson covers the fundamental command-line skills required for this course. 
+In this course we are going to get **comfortable on the command-line**. This lesson will cover all the basic commands we'll need for all of the other lessons.
 
 ### Topics
 
