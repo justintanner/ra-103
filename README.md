@@ -1,6 +1,6 @@
 ## Rails Academy: Lesson 101 - Command Line Essentials
 
-This lesson covers the fundamental command-line skills required for this course. Completion is necessary before proceeding to other lessons.
+This lesson covers the fundamental command-line skills required for this course. 
 
 ### Topics
 
@@ -78,8 +78,7 @@ ra details > ra_details.log
 git add ra_details.log
 git commit -m "Added a log file for review"
 ```
-
-### Create a branch
+### 9. Create a Branch
 
 Make sure you are in the `~/ralessons/ra-101` directory
 
@@ -87,16 +86,12 @@ Make sure you are in the `~/ralessons/ra-101` directory
 cp ~/ralessons/ra-101
 ```
 
-### 9. Create a Branch
-
-- Ensure you’re in the ~/ralessons/ra-101 directory.
 - Create and switch to a branch named after your Skool username:
 
 ```bash
 git branch @skool-username
 git checkout @skool-username
 ```
-
 
 Your terminal prompt should now show:
 
@@ -139,8 +134,9 @@ https://github.com/yourusername/ra-101/pull/1
 
 ### Resources
 
+- :tv: [How to clone, push, and pull with git](https://www.youtube.com/watch?v=yxvqLBHZfXk)
 - :tv: [Bash in 100 Seconds](https://www.youtube.com/watch?v=I4EWvMFj37g)
 - :tv: [Git Explained in 100 Seconds](https://www.youtube.com/watch?v=hwP7WQkmECE)
-- :tv: [How to clone, push, and pull with git](https://www.youtube.com/watch?v=yxvqLBHZfXk)
+
 
 
