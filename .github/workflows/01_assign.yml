@@ -1,12 +1,14 @@
-name: Assign PR to author
+# .github/workflows/auto-author-assign.yml
+name: Auto Author Assign
 
 on:
-  pull_request:
-    types: [opened]
+  pull_request_target:
+
+permissions:
+  pull-requests: write
 
 jobs:
-  auto_assign:
+  assign-author:
     runs-on: ubuntu-latest
     steps:
-      - name: Assign the PR creator
       - uses: toshimaru/auto-author-assign@v2.1.1
