@@ -139,13 +139,13 @@ https://github.com/yourusername/ra-101/pull/1
 
 * Visit your PR on Github.
 
-Now the automatic check should start if you code passes, you'll see:
+The automatic check will run if your code passes, you'll see:
 
 :white_check_mark: All checks have passed
 
 ### :tada: You're Done! :tada:
 
-### Additional Resources
+#### Additional Resources
 
 - :tv: [How to clone, push, and pull with git](https://www.youtube.com/watch?v=yxvqLBHZfXk)
 - :tv: [Bash in 100 Seconds](https://www.youtube.com/watch?v=I4EWvMFj37g)
