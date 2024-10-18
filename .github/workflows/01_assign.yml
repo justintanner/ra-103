@@ -9,7 +9,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Assign the PR creator
-        uses: kentaro-m/auto-assign-action@v1
+        uses: zebbra/auto-assign-issue@v2.0.0
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           assignees: "creator"
