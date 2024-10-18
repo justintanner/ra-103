@@ -1,0 +1,30 @@
+name: Automatic check for lesson 101
+
+on:
+  pull_request:
+    # This will now run on any branch for a PR
+
+jobs:
+  check-skool-file:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Check if skool.txt exists
+        run: |
+          if [ ! -f "./skool.txt" ]; then
+            echo "Error: skool.txt file not found in the root directory." >&2
+            exit 1
+          fi
+
+      - name: Check if skool.txt is not empty
+        run: |
+          if [ ! -s "./skool.txt" ]; then
+            echo "Error: skool.txt file is empty." >&2
+            exit 1
+          fi
+
+      - name: Success
+        run: echo "skool.txt file exists and is not empty!"

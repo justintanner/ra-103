@@ -25,8 +25,8 @@ Open Alacritty and run the following command:
 ssh-keygen -t ed25519
 ```
 
-- Press Enter to accept defaults.
-- Do not enter a password when prompted.
+- Press Enter multiple times to accept to all the defaults
+- Do *not enter* a passphrase when prompted
 
 ### 3. Copy your SSH Key
 
