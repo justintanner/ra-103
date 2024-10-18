@@ -26,5 +26,20 @@ jobs:
             exit 1
           fi
 
+      - name: Validate skool name with list of members
+        run: |
+          SKOOL_NAME=$(cat ./skool.txt)
+          if [ -z "$SKOOL_NAME" ]; then
+            echo "Error: skool.txt is empty." >&2
+            exit 1
+          fi
+          echo "Checking skool.txt content: $SKOOL_NAME"
+          RESPONSE=$(curl -s "https://rails.academy/query?sources=skool_name&skool_name[name]=$SKOOL_NAME")
+          if [[ "$RESPONSE" != *"$SKOOL_NAME"* ]]; then
+            echo "Error: skool name '$SKOOL_NAME' not found in the API response." >&2
+            exit 1
+          fi
+          echo "Success: skool name '$SKOOL_NAME' verified with API!"          
+
       - name: Success
         run: echo "skool.txt file exists and is not empty!"
