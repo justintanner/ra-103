@@ -143,15 +143,9 @@ Now the automatic check should start if you code passes, you'll see:
 
 :white_check_mark: All checks have passed
 
-### 9. Wait for a human review
+### :tada: You're Done! :tada:
 
-Wait for a human to review your work. 
-
-**When it's accepted you'll get an email.**
-
-:tada: You're Done! :tada:
-
-### Resources
+### Additional Resources
 
 - :tv: [How to clone, push, and pull with git](https://www.youtube.com/watch?v=yxvqLBHZfXk)
 - :tv: [Bash in 100 Seconds](https://www.youtube.com/watch?v=I4EWvMFj37g)

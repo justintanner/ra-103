@@ -1,0 +1,16 @@
+name: Assign PR creator and reviewer
+
+on:
+  pull_request:
+    types: [opened]
+
+jobs:
+  auto_assign:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Assign the PR creator
+        uses: kentaro-m/auto-assign-action@v1
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          assignees: "creator"
+          reviewers: "justintanner"
