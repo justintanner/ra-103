@@ -1,4 +1,4 @@
-name: Assign the PR creator
+name: Assign PR to author
 
 on:
   pull_request:
