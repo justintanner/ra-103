@@ -26,7 +26,7 @@ jobs:
             exit 1
           fi
 
-      - name: Validate skool name with list of members
+      - name: Is the skool name in the list of members?
         run: |
           SKOOL_NAME=$(cat ./skool.txt)
           if [ -z "$SKOOL_NAME" ]; then
