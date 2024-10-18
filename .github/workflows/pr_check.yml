@@ -1,8 +1,8 @@
 name: Automatic check for lesson 101
 
+# Run this on all PRs
 on:
   pull_request:
-    # This will now run on any branch for a PR
 
 jobs:
   check-skool-file:
