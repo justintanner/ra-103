@@ -17,7 +17,7 @@ This lesson covers the basic command line tricks we'll need to do lessons on Rai
 
 Visit [GitHub](https://github.com) and create a **free** account or log in if you already have one.
 
-### 2. Generate an SSH Key
+### 2. Generate a local SSH Key
 
 Open Alacritty and run the following command:
 
