@@ -1,6 +1,6 @@
 ## Rails Academy: Lesson 101 - Command Line Essentials
 
-This lesson covers all the basic command line tricks we'll need for this course.
+This lesson covers the basic command line tricks we'll need to do lessons on Rails Academy.
 
 ### Topics
 
