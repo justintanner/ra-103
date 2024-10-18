@@ -138,10 +138,13 @@ gh pr create
 https://github.com/yourusername/ra-101/pull/1
 ```
 
-:tada: You're Done! :tada:
+Once your PR is live, the lesson with be automatically checked, it passes you'll see a green "All checks have passed" message.
 
-* Wait for your PR to be reviewed (you'll get an email and a notification on Github).
-* Once your Pull Request is approved you're ready to move on to the next lesson.
+### 9. Review your PR
+
+Wait for a human to review your work. When it's accepted you'll get an email in your inbox and a notification on Github.
+
+:tada: You're Done! :tada:
 
 ### Resources
 
