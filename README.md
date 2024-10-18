@@ -129,20 +129,24 @@ gh auth login
 gh pr create
 ```
 
-* Choose the default options.
-* Set the title to “Please review my first lesson”.
-* Submit
-* You’ll receive a URL like:
+* Press Enter multiple times to accept the defaults
+* Select Submit
+* You should get a link to your PR, it should look like this:
 
 ```bash
 https://github.com/yourusername/ra-101/pull/1
 ```
 
-Once your PR is live, the lesson with be automatically checked, it passes you'll see a green "All checks have passed" message.
+* Visit your PR on Github.
 
-### 9. Review your PR
+Now the automatic check should start if you code passes, you'll see:
 
-Wait for a human to review your work. When it's accepted you'll get an email in your inbox and a notification on Github.
+:white_check_mark: All checks have passed
+
+### 9. Wait for a human review
+
+Wait for a human to review your work. 
+When it's accepted you'll get an email in your inbox and a notification on Github.
 
 :tada: You're Done! :tada:
 
