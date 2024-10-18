@@ -146,7 +146,8 @@ Now the automatic check should start if you code passes, you'll see:
 ### 9. Wait for a human review
 
 Wait for a human to review your work. 
-When it's accepted you'll get an email in your inbox and a notification on Github.
+
+**When it's accepted you'll get an email.**
 
 :tada: You're Done! :tada:
 
