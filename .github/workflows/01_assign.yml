@@ -1,4 +1,4 @@
-name: Assign PR creator and reviewer
+name: Assign the PR creator
 
 on:
   pull_request:
@@ -9,8 +9,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Assign the PR creator
-        uses: zebbra/auto-assign-issue@v2.0.0
-        with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          assignees: "creator"
-          reviewers: "justintanner"
+      - uses: toshimaru/auto-author-assign@v2.1.1

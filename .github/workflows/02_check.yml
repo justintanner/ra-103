@@ -1,4 +1,4 @@
-name: Automatic check for lesson 101
+name: Check 101
 
 # Run this on all PRs
 on:
