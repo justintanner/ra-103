@@ -47,7 +47,7 @@ jobs:
           echo "Checking skool.txt content: $SKOOL_NAME"
 
           ENCODED_SKOOL_NAME=$(echo "$SKOOL_NAME" | jq -sRr @uri)
-          QUERY = "https://rails.academy/query?sources=skool_name&skool_name[name]=$ENCODED_SKOOL_NAME"
+          QUERY="https://rails.academy/query?sources=skool_name&skool_name[name]=$ENCODED_SKOOL_NAME"
           echo "Querying API: $QUERY"
           RESPONSE=$(curl -s "$QUERY")
           CURL_EXIT_CODE=$?
