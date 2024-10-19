@@ -1,5 +1,9 @@
 name: Check 101
 
+# Added to avoid warning from GitHub
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE20: true
+
 # Run this on all PRs
 on:
   pull_request:
@@ -16,11 +20,10 @@ jobs:
   check-lesson:
     runs-on: ubuntu-latest
 
-    # Added to avoid warning from GitHub
-    env:
-      FORCE_JAVASCRIPT_ACTIONS_TO_NODE20: true
-
     steps:
+      - name: Install curl
+        run: sudo apt-get update && sudo apt-get install -y curl
+
       - name: Checkout code
         uses: actions/checkout@v3
 
