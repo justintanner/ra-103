@@ -16,6 +16,10 @@ jobs:
   check-lesson:
     runs-on: ubuntu-latest
 
+    # Added to avoid warning from GitHub
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE20: true
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -43,6 +47,7 @@ jobs:
           fi
           echo "Checking skool.txt content: $SKOOL_NAME"
           RESPONSE=$(curl -s "https://rails.academy/query?sources=skool_name&skool_name[name]=$SKOOL_NAME")
+          echo "API Response: $RESPONSE"
           if [[ "$RESPONSE" != *"$SKOOL_NAME"* ]]; then
             echo "Error: skool name '$SKOOL_NAME' not found in the API response." >&2
             exit 1
