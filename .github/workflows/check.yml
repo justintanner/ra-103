@@ -12,7 +12,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: toshimaru/auto-author-assign@v2.1.1
-  check-skool-file:
+
+  check-lesson:
     runs-on: ubuntu-latest
 
     steps:
@@ -46,7 +47,7 @@ jobs:
             echo "Error: skool name '$SKOOL_NAME' not found in the API response." >&2
             exit 1
           fi
-          echo "Success: skool name '$SKOOL_NAME' verified with API!"          
+          echo "Success: skool name '$SKOOL_NAME' verified with API!"      
 
       - name: Success
         run: echo "All checks passed!"
