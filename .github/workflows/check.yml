@@ -17,11 +17,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Install curl
-        run: sudo apt-get update && sudo apt-get install -y curl
-
-      - name: Test curl installation
-        run: curl --version
+      - name: Verify we can access the API
+        run: curl -s https://rails.academy/query || exit 1
 
       - name: Checkout code
         uses: actions/checkout@v3
