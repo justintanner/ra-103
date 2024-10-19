@@ -4,7 +4,14 @@ name: Check 101
 on:
   pull_request:
 
+permissions:
+  pull-requests: write
+
 jobs:
+  assign-author:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: toshimaru/auto-author-assign@v2.1.1
   check-skool-file:
     runs-on: ubuntu-latest
 
@@ -42,4 +49,4 @@ jobs:
           echo "Success: skool name '$SKOOL_NAME' verified with API!"          
 
       - name: Success
-        run: echo "skool.txt file exists and is not empty!"
+        run: echo "All checks passed!"
