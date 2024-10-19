@@ -2,6 +2,8 @@
 
 This lesson covers the basic command line tricks we'll need to do lessons on Rails Academy.
 
+If you don't understand all the commands, don't worry! We'll be using them a lot in the future, so you'll get plenty of practice.
+
 ### Topics
 
 - Bash 
