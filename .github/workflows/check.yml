@@ -39,7 +39,7 @@ jobs:
 
       - name: Is the skool name in the list of members?
         run: |
-          SKOOL_NAME=$(cat ./skool.txt | tr -d '\n' | tr -d '\r' | xargs)
+          SKOOL_NAME=$(cat ./skool.txt | sed 's/[^a-zA-Z0-9_-]//g')
           if [ -z "$SKOOL_NAME" ]; then
             echo "Error: skool.txt is empty." >&2
             exit 1
