@@ -55,13 +55,13 @@ jobs:
           RESPONSE=$(curl -s "$QUERY")
           CURL_EXIT_CODE=$?
 
-         if [ "$CURL_EXIT_CODE" -ne 0 ]; then
-           echo "Error: curl command failed with exit code $CURL_EXIT_CODE" >&2
-           exit 1
-         fi
+          if [ "$CURL_EXIT_CODE" -ne 0 ]; then
+            echo "Error: curl command failed with exit code $CURL_EXIT_CODE" >&2
+            exit 1
+          fi
 
-         echo "API Response: $RESPONSE"
-         echo "Success: skool name '$SKOOL_NAME' verified with API!"
+          echo "API Response: $RESPONSE"
+          echo "Success: skool name '$SKOOL_NAME' verified with API!"
 
       - name: Success
         run: echo "All checks passed!"
