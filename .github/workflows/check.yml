@@ -39,17 +39,14 @@ jobs:
 
       - name: Is the skool name in the list of members?
         run: |
-          SKOOL_NAME=SKOOL_NAME=$(cat ./skool.txt | tr -d '\n' | tr -d '\r' | sed 's/[^a-zA-Z0-9_.@~-]//g')
+          SKOOL_NAME=SKOOL_NAME=$(cat ./skool.txt | tr -d '\n' | tr -d '\r' | sed 's/[^a-zA-Z0-9_-]//g')
           if [ -z "$SKOOL_NAME" ]; then
             echo "Error: skool.txt is empty." >&2
             exit 1
           fi
           echo "Checking skool.txt content: $SKOOL_NAME"
 
-          ENCODED_SKOOL_NAME=$(echo "$SKOOL_NAME" | jq -sRr @uri)
-          echo "Encoded skool name: $ENCODED_SKOOL_NAME"
-
-          QUERY="https://rails.academy/query?sources=skool_name&skool_name[name]=$ENCODED_SKOOL_NAME"
+          QUERY="https://rails.academy/query?sources=skool_name&skool_name[name]=$SKOOL_NAME"
           echo "Querying API: $QUERY"
 
           RESPONSE=$(curl -s "$QUERY")
