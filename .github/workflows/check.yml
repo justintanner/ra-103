@@ -80,7 +80,7 @@ jobs:
             -d "skool_name=$SKOOL_NAME" \
             -w "%{http_code}" \
             -o /tmp/sync_response_body.txt \
-            http://rails.academy/commands/sync_skool_name_to_github)
+            http://rails.academy/commands/register)
 
           if [ "$RESPONSE" -ne 200 ]; then
             echo "Error: Failed to sync skool name to GitHub. HTTP Status: $RESPONSE" >&2
