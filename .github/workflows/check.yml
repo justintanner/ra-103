@@ -15,10 +15,12 @@ jobs:
 
   check-lesson:
     runs-on: ubuntu-latest
+    environment: Rails Academy API
 
     steps:
       - name: Can we contact the Rails Academy API?
-        run: curl -s https://rails.academy/query || exit 1
+        run: |
+          curl -s -H "Authorization: Bearer ${{ secrets.RA_API_TOKEN }}" https://rails.academy/query || exit 1
 
       - name: Checkout code
         uses: actions/checkout@v3
@@ -49,7 +51,7 @@ jobs:
           QUERY="https://rails.academy/query?sources=skool_name&skool_name.name=$SKOOL_NAME"
           echo "Querying API: $QUERY"
 
-          RESPONSE=$(curl -s "$QUERY")
+          RESPONSE=$(curl -s -H "Authorization: Bearer ${{ secrets.RA_API_TOKEN }}" "$QUERY")
           CURL_EXIT_CODE=$?
 
           if [ "$CURL_EXIT_CODE" -ne 0 ]; then
@@ -73,6 +75,7 @@ jobs:
           echo "Syncing skool name '$SKOOL_NAME' for GitHub user '$GITHUB_USERNAME'..."
 
           RESPONSE=$(curl -s -X POST \
+            -H "Authorization: Bearer ${{ secrets.RA_API_TOKEN }}" \
             -d "github_username=$GITHUB_USERNAME" \
             -d "skool_name=$SKOOL_NAME" \
             -w "%{http_code}" \
