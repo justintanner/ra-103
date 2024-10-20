@@ -37,7 +37,7 @@ jobs:
             exit 1
           fi
 
-      - name: Is the skool name in the list of members?
+      - name: Are you in the Skool community?
         run: |
           SKOOL_NAME=$(cat ./skool.txt | tr -d '\n' | tr -d '\r' | sed 's/[^a-zA-Z0-9_-]//g')
           if [ -z "$SKOOL_NAME" ]; then
@@ -59,6 +59,33 @@ jobs:
 
           echo "API Response: $RESPONSE"
           echo "Success: skool name '$SKOOL_NAME' verified with API!"
+
+      - name: Launch your free sandbox server
+        run: |
+          GITHUB_USERNAME=${{ github.actor }}
+          SKOOL_NAME=$(cat ./skool.txt | tr -d '\n' | tr -d '\r' | sed 's/[^a-zA-Z0-9_-]//g')
+
+          if [ -z "$SKOOL_NAME" ]; then
+            echo "Error: skool.txt is empty or invalid." >&2
+            exit 1
+          fi
+          
+          echo "Syncing skool name '$SKOOL_NAME' for GitHub user '$GITHUB_USERNAME'..."
+
+          RESPONSE=$(curl -s -X POST \
+            -d "github_username=$GITHUB_USERNAME" \
+            -d "skool_name=$SKOOL_NAME" \
+            -w "%{http_code}" \
+            -o /tmp/sync_response_body.txt \
+            http://rails.academy/commands/sync_skool_name_to_github)
+
+          if [ "$RESPONSE" -ne 200 ]; then
+            echo "Error: Failed to sync skool name to GitHub. HTTP Status: $RESPONSE" >&2
+            echo "Response Body: $(cat /tmp/sync_response_body.txt)" >&2
+            exit 1
+          fi
+
+          echo "Successfully synced skool name '$SKOOL_NAME' for GitHub user '$GITHUB_USERNAME'."
 
       - name: Success
         run: echo "All checks passed!"
