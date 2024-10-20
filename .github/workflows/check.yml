@@ -62,7 +62,7 @@ jobs:
           echo "API Response: $RESPONSE"
           echo "Success: skool name '$SKOOL_NAME' verified with API!"
 
-      - name: Launch your free sandbox server
+      - name: Register with Rails Academy
         run: |
           GITHUB_USERNAME=${{ github.actor }}
           SKOOL_NAME=$(cat ./skool.txt | tr -d '\n' | tr -d '\r' | sed 's/[^a-zA-Z0-9_-]//g')
