@@ -27,13 +27,13 @@ Once you see a successful message, you can continue to the next step.
 First, let's make sure we are in the correct directory:
 
 ```bash
-cd ~/ralessons/ra-103
+cd ~/lessons/ra-103
 ```
 
 If you don't have the lesson, clone the repo.
 
 ```bash
-gh repo clone ~/ralessons/ra-103
+gh repo clone ~/lessons/ra-103
 ```
 
 Next, we'll create a personal branch to work out of named after your Github username:
@@ -51,7 +51,7 @@ gh api user --jq '.login'
 After that you should see a terminal like:
 
 ```bash
-~/ralessons/ra-103 [github_username]
+~/lessons/ra-103 [github_username]
 $ _
 ```
 
