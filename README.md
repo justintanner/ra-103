@@ -55,10 +55,32 @@ After that you should see a terminal like:
 $ _
 ```
 
-### 3. Signup for DockerHub and get your API KEY
+### 3. Signup for DockerHub
+
+#### Username
 
 - Signup for a **free** account or login to [DockerHub](https://hub.docker.com/)
 - Go to your Account Settings
+- Copy your **username** from the top left next to your avatar or empty profile pic
+- Open ~/config/deploy` in your editor and add the following
+
+```yaml
+# Name of the container image.
+image: my-dockerhub-username/ra_103
+```
+
+And below also add your DockerHub username:
+
+```yaml
+# Credentials for your image host.
+registry:
+  # Specify the registry server, if you're not using Docker Hub
+  # server: registry.digitalocean.com / ghcr.io / ...
+  username: my-dockerhub-username
+```
+
+#### API Key
+
 - Click on Personal Access Tokens
 - Generate a new token with the following permissions (Read, Write Delete)
 - Open `./.kamal/secrets` in your editor and add the following
@@ -73,7 +95,7 @@ KAMAL_REGISTRY_PASSWORD="yourkeygoeshere"
 
 Now that you have your changes saved to git, you can deploy your application to a real server.
 
-Open the file `config/deploy.rb`.
+In `config/deploy.rb`.
 
 Update the `server` line to be:
 
@@ -107,18 +129,15 @@ First lets check that our config is good
 kamal config
 ```
 
-If there are no errors, something like this will be displayed:
+#### :rocket: Now deploy your application :rocket:
 
-```yaml
----
-:roles:
-- web
-:hosts:
-...
+```bash
+kamal deploy
 ```
 
-Now open your browser and visit your sandbox URL such as `https://github-username.rails.academy`.
+Visit `https://your-github-username.rails.academy`
 
+:tada: You should see your application running. :tada:
 
 ### 10. Create a Pull Request
 

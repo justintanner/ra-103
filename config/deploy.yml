@@ -2,7 +2,7 @@
 service: ra_103
 
 # Name of the container image.
-image: your-user/ra_103
+image: justintanner/ra_103
 
 # Deploy to these servers.
 servers:
