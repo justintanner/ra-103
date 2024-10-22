@@ -62,7 +62,7 @@ $ _
 - Signup for a **free** account or login to [DockerHub](https://hub.docker.com/)
 - Go to your Account Settings
 - Copy your **username** from the top left next to your avatar or empty profile pic
-- Open ~/config/deploy` in your editor and add the following
+- Open `~/config/deploy` in your editor and add the following
 
 ```yaml
 # Name of the container image.
@@ -129,7 +129,7 @@ kamal config
 
 If you see an error check `deploy.yml` for mistakes.
 
-#### 5. Generate a local rails master.key
+### 5. Generate a local rails master.key
     
 ```bash
 EDITOR=nano rails credentials:edit
