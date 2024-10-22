@@ -15,7 +15,7 @@ You can use this *free server** for the other lessons or anything you want.
 
 ### 1. Install the Rails Academy GitHub app
 
-**If you haven't already [added your ssh keys](https://github.com/justintanner/ra-101?tab=readme-ov-file#2-generate-a-local-ssh-key) from [lesson 101](https://github.com/justintanner/ra-101), please do so now.**
+**If you have not [added your ssh keys](https://github.com/justintanner/ra-101?tab=readme-ov-file#2-generate-a-local-ssh-key) from [lesson 101](https://github.com/justintanner/ra-101) yet, please do so now.**
 
 - Login to your [GitHub account](https://github.com)
 - Install the [Rails Academy GitHub App](https://github.com/apps/rails-academy)
@@ -86,7 +86,7 @@ registry:
 - Open `./.kamal/secrets` in your editor and add the following
 
 ```bash
-KAMAL_REGISTRY_PASSWORD="yourkeygoeshere"
+KAMAL_REGISTRY_PASSWORD=your-personal-access-token
 ```
 
 **Note::** This is not the most secure way to store your secrets, but it is the easiest for this lesson.
@@ -121,21 +121,40 @@ ssh:
   user: your-github-username
 ```
 
-### 9. Deploy your application
-
-First lets check that our config is good
+Finally run the following command to configure Kamal:
 
 ```bash
 kamal config
 ```
 
-#### :rocket: Now deploy your application :rocket:
+If you see an error check `deploy.yml` for mistakes.
+
+#### 5. Generate a local rails master.key
+    
+```bash
+EDITOR=nano rails credentials:edit
+```
+
+Save your changes by pressing `Ctrl + X` and then `Y` to confirm.
+
+This will generate a private key in `config/master.key` required for rails to run.
+
+### 6. Commit your changes to git
+
+```bash
+git add .
+git commit -m "Add DockerHub and Kamal configuration"
+```
+
+### 7. :rocket: Deploy your application :rocket:
 
 ```bash
 kamal deploy
 ```
 
-Visit `https://your-github-username.rails.academy`
+If you don't see any errors you can now see your app running on the web.
+
+`https://your-github-username.rails.academy`
 
 :tada: You should see your application running. :tada:
 
