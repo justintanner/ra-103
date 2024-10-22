@@ -143,7 +143,7 @@ This will generate a private key in `config/master.key` required for rails to ru
 
 ```bash
 git add .
-git commit -m "Add DockerHub and Kamal configuration"
+git commit -m "Added DockerHub and Kamal configuration"
 ```
 
 ### 7. :rocket: Deploy your application :rocket:
@@ -158,7 +158,7 @@ If you don't see any errors you can now see your app running on the web.
 
 :tada: You should see your application running. :tada:
 
-### 10. Create a Pull Request
+### 9. Create a Pull Request
 
 ```bash
 gh pr create
