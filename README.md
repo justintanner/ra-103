@@ -30,12 +30,6 @@ First, let's make sure we are in the correct directory:
 cd ~/lessons/ra-103
 ```
 
-If you don't have the lesson, clone the repo.
-
-```bash
-gh repo clone ~/lessons/ra-103
-```
-
 Next, we'll create a personal branch to work out of named after your Github username:
 
 ```bash
@@ -176,5 +170,3 @@ The automatic check will run if your code passes, you'll see:
 
 - :tv: [Kamal](https://kamal-deploy.org/)
 - :tv: [Kamal 1.0](https://www.youtube.com/watch?v=yWSpjKErnco)
-
-
