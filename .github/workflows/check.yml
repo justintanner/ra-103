@@ -1,6 +1,4 @@
-name: Check 101
-
-# Run this on all PRs
+# Run this on all PRs for Lesson 103
 on:
   pull_request:
 
@@ -13,82 +11,58 @@ jobs:
     steps:
       - uses: toshimaru/auto-author-assign@v2.1.1
 
-  check-lesson:
+  check-lesson-103:
     runs-on: ubuntu-latest
     environment: Rails Academy API
 
     steps:
-      - name: Can we contact the Rails Academy API?
-        run: |
-          curl -s -H "Authorization: Bearer ${{ secrets.RA_API_TOKEN }}" https://rails.academy/query || exit 1
-
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Check if skool.txt exists
+      - name: Visit the server
+        id: extract_server
         run: |
-          if [ ! -f "./skool.txt" ]; then
-            echo "Error: skool.txt file not found in the root directory." >&2
+          SERVER_URL=$(grep -Eo "host: [a-zA-Z0-9_\-]+.rails.academy" config/deploy.yml | sed 's/host: //')
+          
+          if [ -z "$SERVER_URL" ]; then
+            echo "Error: Could not extract server URL from deploy.rb." >&2
             exit 1
           fi
 
-      - name: Check if skool.txt is not empty
-        run: |
-          if [ ! -s "./skool.txt" ]; then
-            echo "Error: skool.txt file is empty." >&2
+          echo "Visiting the deployed server at $SERVER_URL..."
+          
+          RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" "https://$SERVER_URL")
+
+          if [ "$RESPONSE" -ne 200 ]; then
+            echo "Error: Failed to get a 200 response from $server_url. HTTP Status: $RESPONSE" >&2
             exit 1
           fi
 
-      - name: Are you in the Skool community?
-        run: |
-          SKOOL_NAME=$(cat ./skool.txt | tr -d '\n' | tr -d '\r' | sed 's/[^a-zA-Z0-9_-]//g')
-          if [ -z "$SKOOL_NAME" ]; then
-            echo "Error: skool.txt is empty." >&2
-            exit 1
-          fi
-          echo "Checking skool.txt content: $SKOOL_NAME"
-
-          QUERY="https://rails.academy/query?sources=skool_name&skool_name.name=$SKOOL_NAME"
-          echo "Querying API: $QUERY"
-
-          RESPONSE=$(curl -s -H "Authorization: Bearer ${{ secrets.RA_API_TOKEN }}" "$QUERY")
-          CURL_EXIT_CODE=$?
-
-          if [ "$CURL_EXIT_CODE" -ne 0 ]; then
-            echo "Error: curl command failed with exit code $CURL_EXIT_CODE" >&2
-            exit 1
-          fi
-
-          echo "API Response: $RESPONSE"
-          echo "Success: skool name '$SKOOL_NAME' verified with API!"
+          echo "Successfully received a 200 response from $SERVER_URL."
 
       - name: Register with Rails Academy
         run: |
           GITHUB_USERNAME=${{ github.actor }}
-          SKOOL_NAME=$(cat ./skool.txt | tr -d '\n' | tr -d '\r' | sed 's/[^a-zA-Z0-9_-]//g')
+          GITHUB_ID=${{ github.actor_id }}
 
-          if [ -z "$SKOOL_NAME" ]; then
-            echo "Error: skool.txt is empty or invalid." >&2
-            exit 1
-          fi
-          
-          echo "Syncing skool name '$SKOOL_NAME' for GitHub user '$GITHUB_USERNAME'..."
+          echo "Registering for Lesson 103 for GitHub user '$GITHUB_USERNAME'..."
 
           RESPONSE=$(curl -s -X POST \
             -H "Authorization: Bearer ${{ secrets.RA_API_TOKEN }}" \
+            -d "github_id=$GITHUB_ID" \
             -d "github_username=$GITHUB_USERNAME" \
-            -d "skool_name=$SKOOL_NAME" \
+            -d "lesson=103" \
             -w "%{http_code}" \
-            -o /tmp/sync_response_body.txt \
-            https://rails.academy/commands/register)
+            -o /tmp/lesson_response_body.txt \
+            https://rails.academy/commands/finish_lesson)
 
           if [ "$RESPONSE" -ne 200 ]; then
-            echo "Error: Failed to sync skool name to GitHub. HTTP Status: $RESPONSE" >&2
-            echo "Response Body: $(cat /tmp/sync_response_body.txt)" >&2
+            echo "Error: Failed to register Lesson 103. HTTP Status: $RESPONSE TOKEN: ${{ secrets.RA_API_TOKEN }}" >&2
+            echo "Response Body: $(cat /tmp/lesson_response_body.txt)" >&2
             exit 1
           fi
 
-          echo "Successfully synced skool name '$SKOOL_NAME' for GitHub user '$GITHUB_USERNAME'."
+          echo "Successfully registered Lesson 103 for GitHub user '$GITHUB_USERNAME'."
 
       - name: Success
-        run: echo "All checks passed!"
+        run: echo "All checks passed for Lesson 103!"
